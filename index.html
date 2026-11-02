@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculus Visualizer - Derivatives, Integrals & Limits</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.11.0/lib/browser/math.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>Calculus Visualizer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#derivatives" class="nav-link">Derivatives</a></li>
+                <li><a href="#integrals" class="nav-link">Integrals</a></li>
+                <li><a href="#limits" class="nav-link">Limits</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Interactive Calculus Visualizations</h1>
+            <p>Explore derivatives, integrals, and limits through interactive graphs and animations</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Derivatives Section -->
+        <section id="derivatives" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> Derivatives</h2>
+                <p>Visualize the rate of change and tangent lines</p>
+            </div>
+            
+            <div class="visualization-container">
+                <div class="control-panel">
+                    <div class="function-input">
+                        <label for="derivative-func">Function f(x):</label>
+                        <input type="text" id="derivative-func" value="x^2" placeholder="e.g., x^2, sin(x), cos(x)">
+                    </div>
+                    <div class="point-input">
+                        <label for="derivative-point">Point x:</label>
+                        <input type="number" id="derivative-point" value="1" step="0.1">
+                    </div>
+                    <button onclick="updateDerivative()" class="btn-primary">Update Visualization</button>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="derivative-chart"></canvas>
+                </div>
+                
+                <div class="info-panel">
+                    <div class="result-box">
+                        <h3>Derivative Information</h3>
+                        <p id="derivative-result">f'(x) = 2x</p>
+                        <p id="tangent-result">Tangent at x=1: y = 2x - 1</p>
+                        <p id="slope-result">Slope at x=1: 2</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integrals Section -->
+        <section id="integrals" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-integral"></i> Integrals</h2>
+                <p>Visualize area under curves and definite integrals</p>
+            </div>
+            
+            <div class="visualization-container">
+                <div class="control-panel">
+                    <div class="function-input">
+                        <label for="integral-func">Function f(x):</label>
+                        <input type="text" id="integral-func" value="x^2" placeholder="e.g., x^2, sin(x), cos(x)">
+                    </div>
+                    <div class="range-inputs">
+                        <div>
+                            <label for="integral-start">Start:</label>
+                            <input type="number" id="integral-start" value="0" step="0.1">
+                        </div>
+                        <div>
+                            <label for="integral-end">End:</label>
+                            <input type="number" id="integral-end" value="2" step="0.1">
+                        </div>
+                    </div>
+                    <button onclick="updateIntegral()" class="btn-primary">Update Visualization</button>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="integral-chart"></canvas>
+                </div>
+                
+                <div class="info-panel">
+                    <div class="result-box">
+                        <h3>Integral Information</h3>
+                        <p id="integral-result">∫₀² x² dx = 8/3 ≈ 2.67</p>
+                        <p id="area-result">Area under curve: 2.67 square units</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Limits Section -->
+        <section id="limits" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-infinity"></i> Limits</h2>
+                <p>Visualize function behavior as x approaches a value</p>
+            </div>
+            
+            <div class="visualization-container">
+                <div class="control-panel">
+                    <div class="function-input">
+                        <label for="limit-func">Function f(x):</label>
+                        <input type="text" id="limit-func" value="(sin(x))/x" placeholder="e.g., (sin(x))/x, (x^2-1)/(x-1)">
+                    </div>
+                    <div class="point-input">
+                        <label for="limit-point">Approach x:</label>
+                        <input type="number" id="limit-point" value="0" step="0.1">
+                    </div>
+                    <div class="approach-direction">
+                        <label>
+                            <input type="radio" name="direction" value="both" checked> Both sides
+                        </label>
+                        <label>
+                            <input type="radio" name="direction" value="left"> Left only
+                        </label>
+                        <label>
+                            <input type="radio" name="direction" value="right"> Right only
+                        </label>
+                    </div>
+                    <button onclick="updateLimit()" class="btn-primary">Update Visualization</button>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="limit-chart"></canvas>
+                </div>
+                
+                <div class="info-panel">
+                    <div class="result-box">
+                        <h3>Limit Information</h3>
+                        <p id="limit-result">limₓ→₀ (sin(x))/x = 1</p>
+                        <p id="approach-result">Function approaches 1 as x approaches 0</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section id="examples" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-lightbulb"></i> Common Examples</h2>
+                <p>Pre-built examples to explore key calculus concepts</p>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card" onclick="loadExample('polynomial')">
+                    <h3><i class="fas fa-square-root-alt"></i> Polynomials</h3>
+                    <p>Explore derivatives and integrals of polynomial functions</p>
+                </div>
+                <div class="example-card" onclick="loadExample('trigonometric')">
+                    <h3><i class="fas fa-wave-square"></i> Trigonometric</h3>
+                    <p>Visualize sin, cos, and their derivatives/integrals</p>
+                </div>
+                <div class="example-card" onclick="loadExample('exponential')">
+                    <h3><i class="fas fa-chart-area"></i> Exponential</h3>
+                    <p>Explore e^x and related functions</p>
+                </div>
+                <div class="example-card" onclick="loadExample('rational')">
+                    <h3><i class="fas fa-fraction"></i> Rational</h3>
+                    <p>Study functions with discontinuities and asymptotes</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Calculus Visualizer. Educational tool for learning calculus concepts.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
